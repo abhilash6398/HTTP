@@ -30,6 +30,13 @@
           [disabled]="!postForm.valid"
         >
           Send Post
+        </button>..
+        <button
+          class="btn btn-danger"
+          type="reset"
+          [disabled]="!postForm.valid"
+        >
+          Cancel
         </button>
       </form>
     </div>
@@ -67,6 +74,7 @@
       <div class="alert alert-danger" *ngIf="error">
         <h1>An error occured</h1>
         <p>{{error}}</p>
+        <button class="btn btn-danger" (click)="onHandleError()">Okay</button>
       </div>
     </div>
   </div>

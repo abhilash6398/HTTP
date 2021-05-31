@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Post } from './post.model';
-import { title } from 'process';
+// import { title } from 'process';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isFetching=false;
       this.loadedPosts=posts;
     },error=>{
+      this.isFetching=false;
       this.error=error.message;
     });
   }
@@ -41,6 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.postsService.fetchPosts().subscribe(posts=>{
       this.isFetching=false;
       this.loadedPosts=posts;
+    }, error => {
+      this.isFetching=false;
+      this.error=error.message;
+      console.log(error);
     });
   }
 
@@ -49,6 +54,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.postsService.deletePosts().subscribe(()=>{
       this.loadedPosts=[];
     })
+  }
+
+  onHandleError(){
+    this.error=null;
   }
 
   ngOnDestroy(){
